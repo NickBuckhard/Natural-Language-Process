@@ -1,5 +1,33 @@
 from importlib.metadata import version
+import os
+import urllib.request
 
 print("torch version:", version("torch"))
 print("tiktoken version:", version("tiktoken"))
+
+# Check if the file "the-verdict.txt" does not exist in the current directory
+if not os.path.exists("the-verdict.txt"):
+    # If the file does not exist, define the URL where the file can be downloaded from
+    url = ("https://raw.githubusercontent.com/rasbt/"
+           "LLMs-from-scratch/main/ch02/01_main-chapter-code/"
+           "the-verdict.txt")
+    
+    # Define the path where the file will be saved locally
+    file_path = "the-verdict.txt"
+    
+    # Download the file from the specified URL and save it to the defined file path
+    urllib.request.urlretrieve(url, file_path)
+
+# Open the file "the-verdict.txt" in read mode with UTF-8 encoding
+with open("the-verdict.txt", "r", encoding="utf-8") as f:
+    # Read the entire content of the file into the variable 'raw_text'
+    raw_text = f.read()
+# Print the total number of characters in the file
+print("Total number of characters:", len(raw_text))
+
+# Print the first 99 characters of the file content
+print(raw_text[:99])
+
+
+
 
